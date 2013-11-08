@@ -21,8 +21,8 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-import urllib2
 import argparse
+import urllib2
 try:
 	import simplejson as json
 except ImportError:
@@ -57,7 +57,8 @@ EC2_INSTANCE_TYPES = [
 	"m3.xlarge",
 	"m3.2xlarge",
 	"hi1.4xlarge",
-	"hs1.8xlarge"
+	"hs1.8xlarge",
+	"g2.2xlarge",
 ]
 
 EC2_OS_TYPES = [
@@ -175,42 +176,6 @@ INSTANCES_RESERVED_UTILIZATION_TYPE_BY_URL = {
 
 DEFAULT_CURRENCY = "USD"
 
-INSTANCE_TYPE_MAPPING = {
-	"stdODI" : "m1",
-	"uODI" : "t1",
-	"hiMemODI" : "m2",
-	"hiCPUODI" : "c1",
-	"clusterComputeI" : "cc1",
-	"clusterGPUI" : "cg1",
-	"hiIoODI" : "hi1",
-	"secgenstdODI" : "m3",
-	"hiStoreODI": "hs1",
-	"clusterHiMemODI": "cr1",
-
-	# Reserved Instance Types
-	"stdResI" : "m1",
-	"uResI" : "t1",
-	"hiMemResI" : "m2",
-	"hiCPUResI" : "c1",
-	"clusterCompResI" : "cc1",
-	"clusterGPUResI" : "cg1",
-	"hiIoResI" : "hi1",
-	"secgenstdResI" : "m3",
-	"hiStoreResI": "hs1",
-	"clusterHiMemResI": "cr1"
-}
-
-INSTANCE_SIZE_MAPPING = {
-	"u" : "micro",
-	"sm" : "small",
-	"med" : "medium",
-	"lg" : "large",
-	"xl" : "xlarge",
-	"xxl" : "2xlarge",
-	"xxxxl" : "4xlarge",
-	"xxxxxxxxl" : "8xlarge"
-}
-
 def _load_data(url):
 	f = urllib2.urlopen(url)
 	return json.loads(f.read())
@@ -265,10 +230,10 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 		if "config" in data and data["config"] and "regions" in data["config"] and data["config"]["regions"]:
 			for r in data["config"]["regions"]:
 				if "region" in r and r["region"]:
-					if get_specific_region and filter_region != r["region"]:
+					region_name = JSON_NAME_TO_EC2_REGIONS_API[r["region"]]
+					if get_specific_region and filter_region != region_name:
 						continue
 
-					region_name = JSON_NAME_TO_EC2_REGIONS_API[r["region"]]
 					if region_name in result_regions_index:
 						instance_types = result_regions_index[region_name]["instanceTypes"]
 					else:
@@ -281,10 +246,9 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 						
 					if "instanceTypes" in r:
 						for it in r["instanceTypes"]:
-							instance_type = INSTANCE_TYPE_MAPPING[it["type"]]
 							if "sizes" in it:
 								for s in it["sizes"]:
-									instance_size = INSTANCE_SIZE_MAPPING[s["size"]]
+									_type = s["size"]
 	
 									prices = {
 										"1year" : {
@@ -297,15 +261,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 										}
 									}
 	
-									_type = "%s.%s" % (instance_type, instance_size)
-									if _type == "cc1.8xlarge":
-										# Fix conflict where cc1 and cc2 share the same type
-										_type = "cc2.8xlarge"
-	
 									if get_specific_instance_type and _type != filter_instance_type:
-										continue
-	
-									if get_specific_os_type and os_type != filter_os_type:
 										continue
 	
 									instance_types.append({
@@ -377,10 +333,9 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 					instance_types = []
 					if "instanceTypes" in r:
 						for it in r["instanceTypes"]:
-							instance_type = INSTANCE_TYPE_MAPPING[it["type"]]
 							if "sizes" in it:
 								for s in it["sizes"]:
-									instance_size = INSTANCE_SIZE_MAPPING[s["size"]]
+									_type = s["size"]
 	
 									for price_data in s["valueColumns"]:
 										price = None
@@ -388,11 +343,6 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 											price = float(price_data["prices"][currency])
 										except ValueError:
 											price = None
-	
-										_type = "%s.%s" % (instance_type, instance_size)
-										if _type == "cc1.8xlarge":
-											# Fix conflict where cc1 and cc2 share the same type
-											_type = "cc2.8xlarge"
 	
 										if get_specific_instance_type and _type != filter_instance_type:
 											continue
