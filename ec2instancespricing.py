@@ -48,6 +48,11 @@ EC2_INSTANCE_TYPES = [
 	"m2.xlarge",
 	"m2.2xlarge",
 	"m2.4xlarge",
+	"c3.large",
+	"c3.xlarge",
+	"c3.2xlarge",
+	"c3.4xlarge",
+	"c3.8xlarge",
 	"c1.medium",
 	"c1.xlarge",
 	"cc1.4xlarge",
@@ -85,17 +90,6 @@ JSON_NAME_TO_EC2_REGIONS_API = {
 	"apac-tokyo" : "ap-northeast-1",
 	"ap-northeast-1" : "ap-northeast-1",
 	"sa-east-1" : "sa-east-1"
-}
-
-EC2_REGIONS_API_TO_JSON_NAME = {
-	"us-east-1" : "us-east",
-	"us-west-1" : "us-west",
-	"us-west-2" : "us-west-2",
-	"eu-west-1" : "eu-ireland",
-	"ap-southeast-1" : "apac-sin",
-	"ap-southeast-2" : "apac-syd",
-	"ap-northeast-1" : "apac-tokyo",
-	"sa-east-1" : "sa-east-1"	
 }
 
 INSTANCES_ON_DEMAND_LINUX_URL = "http://aws.amazon.com/ec2/pricing/json/linux-od.json"
@@ -184,8 +178,6 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 	""" Get EC2 reserved instances prices. Results can be filtered by region """
 
 	get_specific_region = (filter_region is not None)
-	if get_specific_region:
-		filter_region = EC2_REGIONS_API_TO_JSON_NAME[filter_region]
 	get_specific_instance_type = (filter_instance_type is not None)
 	get_specific_os_type = (filter_os_type is not None)
 
@@ -231,6 +223,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 			for r in data["config"]["regions"]:
 				if "region" in r and r["region"]:
 					region_name = JSON_NAME_TO_EC2_REGIONS_API[r["region"]]
+
 					if get_specific_region and filter_region != region_name:
 						continue
 
@@ -293,9 +286,6 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	""" Get EC2 on-demand instances prices. Results can be filtered by region """
 
 	get_specific_region = (filter_region is not None)
-	if get_specific_region:
-		filter_region = EC2_REGIONS_API_TO_JSON_NAME[filter_region]
-
 	get_specific_instance_type = (filter_instance_type is not None)
 	get_specific_os_type = (filter_os_type is not None)
 
@@ -326,10 +316,11 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 		if "config" in data and data["config"] and "regions" in data["config"] and data["config"]["regions"]:
 			for r in data["config"]["regions"]:
 				if "region" in r and r["region"]:
-					if get_specific_region and filter_region != r["region"]:
+					region_name = JSON_NAME_TO_EC2_REGIONS_API[r["region"]]
+
+					if get_specific_region and filter_region != region_name:
 						continue
 	
-					region_name = JSON_NAME_TO_EC2_REGIONS_API[r["region"]]
 					instance_types = []
 					if "instanceTypes" in r:
 						for it in r["instanceTypes"]:
