@@ -44,3 +44,20 @@ This contains a class named `EC2InstancePrices` which exposes the following meth
  - `get_ec2_data` - to print out both the on-demand and reserved instance data as `JSON`
  
 It currently doesn't have a Command-Line-Interface
+
+
+ec2marketplace.py
+=================
+
+Written by Evgeny Gridasov
+http://egreex.com
+https://awsreport.egreex.com
+
+ec2marketplace.py is a marketplace price ripper. Requires boto and BeautifulSoup.
+Both of these libraries can be installed using the 'pip install' command.
+You will need to export your AWS account credentials to generate the price list:
+
+export AWS_ACCESS_KEY_ID=AKA.....
+export AWS_SECRET_ACCESS_KEY=.......
+
+
