@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #
 # Copyright (c) 2012 Eran Sandler (eran@sandler.co.il),  http://eran.sandler.co.il,  http://forecastcloudy.net
+# Portions Copyright (c) 2014 Evgeny Gridasov (evgeny.gridasov@gmail.com), http://egreex.com, https://awsreport.egreex.com
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -96,30 +97,30 @@ JSON_NAME_TO_EC2_REGIONS_API = {
 	"sa-east-1" : "sa-east-1"
 }
 
-INSTANCES_ON_DEMAND_LINUX_URL = "http://aws.amazon.com/ec2/pricing/json/linux-od.json"
-INSTANCES_ON_DEMAND_RHEL_URL = "http://aws.amazon.com/ec2/pricing/json/rhel-od.json"
-INSTANCES_ON_DEMAND_SLES_URL = "http://aws.amazon.com/ec2/pricing/json/sles-od.json"
-INSTANCES_ON_DEMAND_WINDOWS_URL = "http://aws.amazon.com/ec2/pricing/json/mswin-od.json"
-INSTANCES_ON_DEMAND_WINSQL_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQL-od.json"
-INSTANCES_ON_DEMAND_WINSQLWEB_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQLWeb-od.json"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_LINUX_URL = "http://aws.amazon.com/ec2/pricing/json/linux-ri-light.json"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_RHEL_URL = "http://aws.amazon.com/ec2/pricing/json/rhel-ri-light.json"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_SLES_URL = "http://aws.amazon.com/ec2/pricing/json/sles-ri-light.json"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL = "http://aws.amazon.com/ec2/pricing/json/mswin-ri-light.json"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQL_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQL-ri-light.json"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQLWeb-ri-light.json"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_LINUX_URL = "http://aws.amazon.com/ec2/pricing/json/linux-ri-medium.json"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_RHEL_URL = "http://aws.amazon.com/ec2/pricing/json/rhel-ri-medium.json"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_SLES_URL = "http://aws.amazon.com/ec2/pricing/json/sles-ri-medium.json"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL = "http://aws.amazon.com/ec2/pricing/json/mswin-ri-medium.json"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQL-ri-medium.json"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQLWeb-ri-medium.json"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_LINUX_URL = "http://aws.amazon.com/ec2/pricing/json/linux-ri-heavy.json"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_RHEL_URL = "http://aws.amazon.com/ec2/pricing/json/rhel-ri-heavy.json"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL = "http://aws.amazon.com/ec2/pricing/json/sles-ri-heavy.json"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL = "http://aws.amazon.com/ec2/pricing/json/mswin-ri-heavy.json"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQL-ri-heavy.json"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL = "http://aws.amazon.com/ec2/pricing/json/mswinSQLWeb-ri-heavy.json"
+INSTANCES_ON_DEMAND_LINUX_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/linux-od.js"
+INSTANCES_ON_DEMAND_RHEL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/rhel-od.js"
+INSTANCES_ON_DEMAND_SLES_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/sles-od.js"
+INSTANCES_ON_DEMAND_WINDOWS_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswin-od.js"
+INSTANCES_ON_DEMAND_WINSQL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQL-od.js"
+INSTANCES_ON_DEMAND_WINSQLWEB_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQLWeb-od.js"
+INSTANCES_RESERVED_LIGHT_UTILIZATION_LINUX_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/linux-ri-light.js"
+INSTANCES_RESERVED_LIGHT_UTILIZATION_RHEL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/rhel-ri-light.js"
+INSTANCES_RESERVED_LIGHT_UTILIZATION_SLES_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/sles-ri-light.js"
+INSTANCES_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswin-ri-light.js"
+INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQL-ri-light.js"
+INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQLWeb-ri-light.js"
+INSTANCES_RESERVED_MEDIUM_UTILIZATION_LINUX_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/linux-ri-medium.js"
+INSTANCES_RESERVED_MEDIUM_UTILIZATION_RHEL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/rhel-ri-medium.js"
+INSTANCES_RESERVED_MEDIUM_UTILIZATION_SLES_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/sles-ri-medium.js"
+INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswin-ri-medium.js"
+INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQL-ri-medium.js"
+INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQLWeb-ri-medium.js"
+INSTANCES_RESERVED_HEAVY_UTILIZATION_LINUX_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/linux-ri-heavy.js"
+INSTANCES_RESERVED_HEAVY_UTILIZATION_RHEL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/rhel-ri-heavy.js"
+INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/sles-ri-heavy.js"
+INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswin-ri-heavy.js"
+INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQL-ri-heavy.js"
+INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/mswinSQLWeb-ri-heavy.js"
 
 INSTANCES_ONDEMAND_OS_TYPE_BY_URL = {
 	INSTANCES_ON_DEMAND_LINUX_URL : "linux",
@@ -175,8 +176,11 @@ INSTANCES_RESERVED_UTILIZATION_TYPE_BY_URL = {
 DEFAULT_CURRENCY = "USD"
 
 def _load_data(url):
-	f = urllib2.urlopen(url)
-	return json.loads(f.read())
+	f = urllib2.urlopen(url).read()
+	def callback(json):
+		return json
+	data = eval(f, {"__builtins__" : None}, {"callback" : callback} )
+	return data
 
 def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=None, filter_os_type=None):
 	""" Get EC2 reserved instances prices. Results can be filtered by region """
