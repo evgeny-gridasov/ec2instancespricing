@@ -185,7 +185,6 @@ INSTANCES_RESERVED_UTILIZATION_TYPE_BY_URL = {
 DEFAULT_CURRENCY = "USD"
 
 def _load_data(url):
-	print url
 	f = urllib2.urlopen(url).read()
 	f = re.sub("/\\*[^\x00]+\\*/", "", f, 0, re.M)
 	f = re.sub("([a-zA-Z0-9]+):", "\"\\1\":", f)
