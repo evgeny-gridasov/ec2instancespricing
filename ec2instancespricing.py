@@ -130,6 +130,7 @@ INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing
 INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-heavy.min.js"
 INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-heavy.min.js"
 INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-heavy.min.js"
+INSTANCES_SPOT_URL = "http://spot-price.s3.amazonaws.com/spot.js"
 
 INSTANCES_ONDEMAND_OS_TYPE_BY_URL = {
 	INSTANCES_ON_DEMAND_LINUX_URL : "linux",
@@ -302,7 +303,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 
 	return result
 
-def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=None, filter_os_type=None):
+def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=None, filter_os_type=None, pricing_type="ondemand"):
 	""" Get EC2 on-demand instances prices. Results can be filtered by region """
 
 	get_specific_region = (filter_region is not None)
@@ -311,14 +312,19 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 
 	currency = DEFAULT_CURRENCY
 	
-	urls = [
-		INSTANCES_ON_DEMAND_LINUX_URL,
-		INSTANCES_ON_DEMAND_RHEL_URL,
-		INSTANCES_ON_DEMAND_SLES_URL,
-		INSTANCES_ON_DEMAND_WINDOWS_URL,
-		INSTANCES_ON_DEMAND_WINSQL_URL,
-		INSTANCES_ON_DEMAND_WINSQLWEB_URL		
-	]
+	if pricing_type == "ondemand":
+		urls = [
+			INSTANCES_ON_DEMAND_LINUX_URL,
+			INSTANCES_ON_DEMAND_RHEL_URL,
+			INSTANCES_ON_DEMAND_SLES_URL,
+			INSTANCES_ON_DEMAND_WINDOWS_URL,
+			INSTANCES_ON_DEMAND_WINSQL_URL,
+			INSTANCES_ON_DEMAND_WINSQLWEB_URL		
+		]
+	elif pricing_type == "spot":
+		urls = [ INSTANCES_SPOT_URL ]
+	else:
+		raise ValueError("get_ec2_ondemand_instances_prices: pricing_type argument must be 'ondemand' or 'spot'")
 
 	result_regions = []
 	result = {
@@ -330,7 +336,7 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	}
 
 	for u in urls:
-		if get_specific_os_type and INSTANCES_ONDEMAND_OS_TYPE_BY_URL[u] != filter_os_type:
+		if get_specific_os_type and pricing_type == "ondemand" and INSTANCES_ONDEMAND_OS_TYPE_BY_URL[u] != filter_os_type:
 			continue
 		data = _load_data(u)
 		if "config" in data and data["config"] and "regions" in data["config"] and data["config"]["regions"]:
@@ -389,7 +395,7 @@ if __name__ == "__main__":
 
 
 	parser = argparse.ArgumentParser(add_help=True, description="Print out the current prices of EC2 instances")
-	parser.add_argument("--type", "-t", help="Show ondemand or reserved instances", choices=["ondemand", "reserved"], required=True)
+	parser.add_argument("--type", "-t", help="Show ondemand, reserved, or spot instances", choices=["ondemand", "reserved", "spot"], required=True)
 	parser.add_argument("--filter-region", "-fr", help="Filter results to a specific region", choices=EC2_REGIONS, default=None)
 	parser.add_argument("--filter-type", "-ft", help="Filter results to a specific instance type", choices=EC2_INSTANCE_TYPES, default=None)
 	parser.add_argument("--filter-os-type", "-fo", help="Filter results to a specific os type", choices=EC2_OS_TYPES, default=None)
@@ -404,8 +410,8 @@ if __name__ == "__main__":
 			print "ERROR: Please install 'prettytable' using pip:    pip install prettytable"
 
 	data = None
-	if args.type == "ondemand":
-		data = get_ec2_ondemand_instances_prices(args.filter_region, args.filter_type, args.filter_os_type)
+	if args.type == "ondemand" or args.type == "spot":
+		data = get_ec2_ondemand_instances_prices(args.filter_region, args.filter_type, args.filter_os_type, args.type)
 	elif args.type == "reserved":
 		data = get_ec2_reserved_instances_prices(args.filter_region, args.filter_type, args.filter_os_type)
 
@@ -414,7 +420,7 @@ if __name__ == "__main__":
 	elif args.format == "table":
 		x = PrettyTable()
 
-		if args.type == "ondemand":
+		if args.type == "ondemand" or args.type == "spot":
 			try:			
 				x.set_field_names(["region", "type", "os", "price"])
 			except AttributeError:
@@ -450,7 +456,7 @@ if __name__ == "__main__":
 
 		print x
 	elif args.format == "csv":
-		if args.type == "ondemand":
+		if args.type == "ondemand" or args.type == "spot":
 			print "region,type,os,price"
 			for r in data["regions"]:
 				region_name = r["region"]
