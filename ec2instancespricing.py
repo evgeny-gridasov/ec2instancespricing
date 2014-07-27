@@ -43,6 +43,9 @@ EC2_REGIONS = [
 
 EC2_INSTANCE_TYPES = [
 	"t1.micro",
+	"t2.micro",
+	"t2.small",
+	"t2.medium",
 	"m1.small",
 	"m1.medium",
 	"m1.large",
@@ -330,7 +333,8 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	}
 
 	for u in urls:
-		if get_specific_os_type and INSTANCES_ONDEMAND_OS_TYPE_BY_URL[u] != filter_os_type:
+		os_type = INSTANCES_ONDEMAND_OS_TYPE_BY_URL[u]
+		if get_specific_os_type and os_type != filter_os_type:
 			continue
 		data = _load_data(u)
 		if "config" in data and data["config"] and "regions" in data["config"] and data["config"]["regions"]:
@@ -363,7 +367,7 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	
 										instance_types.append({
 											"type" : _type,
-											"os" : price_data["name"],
+											"os" : os_type,
 											"price" : price
 										})
 	
