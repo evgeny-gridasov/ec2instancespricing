@@ -463,9 +463,6 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 										if get_specific_instance_type and _type != filter_instance_type:
 											continue
 	
-										if get_specific_os_type and price_data["name"] != filter_os_type:
-											continue
-	
 										instance_types.append({
 											"type" : _type,
 											"os" : os_type,
