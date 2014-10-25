@@ -35,6 +35,7 @@ EC2_REGIONS = [
 	"us-west-1",
 	"us-west-2",
 	"eu-west-1",
+	"eu-central-1",
 	"ap-southeast-1",
 	"ap-southeast-2",
 	"ap-northeast-1",
@@ -100,6 +101,7 @@ JSON_NAME_TO_EC2_REGIONS_API = {
 	"us-west-2" : "us-west-2",
 	"eu-ireland" : "eu-west-1",
 	"eu-west-1" : "eu-west-1",
+	"eu-central-1" : "eu-central-1",
 	"apac-sin" : "ap-southeast-1",
 	"ap-southeast-1" : "ap-southeast-1",
 	"ap-southeast-2" : "ap-southeast-2",
@@ -264,9 +266,14 @@ DEFAULT_CURRENCY = "USD"
 
 def _load_data(url):
 	f = urllib2.urlopen(url).read()
+	# remove comments
 	f = re.sub("/\\*[^\x00]+\\*/", "", f, 0, re.M)
+	# quote field names
 	f = re.sub("([a-zA-Z0-9]+):", "\"\\1\":", f)
+	# lf in the end
 	f = re.sub(";", "\n", f)
+	# null values -> None
+	f = re.sub("null", "None", f);
 	def callback(json):
 		return json
 	data = eval(f, {"__builtins__" : None}, {"callback" : callback} )
@@ -458,6 +465,8 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 										try:
 											price = float(price_data["prices"][currency])
 										except ValueError:
+											price = None
+										except TypeError:
 											price = None
 	
 										if get_specific_instance_type and _type != filter_instance_type:
