@@ -144,6 +144,7 @@ INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing
 INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-heavy.min.js"
 INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-heavy.min.js"
 INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-heavy.min.js"
+INSTANCES_SPOT_URL = "http://spot-price.s3.amazonaws.com/spot.js"
 
 INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_linux.min.js"
 INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_redhatlinux.min.js"
@@ -407,7 +408,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 
 	return result
 
-def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=None, filter_os_type=None):
+def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=None, filter_os_type=None, pricing_type="ondemand"):
 	""" Get EC2 on-demand instances prices. Results can be filtered by region """
 
 	get_specific_region = (filter_region is not None)
@@ -416,21 +417,26 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 
 	currency = DEFAULT_CURRENCY
 	
-	urls = [
-		INSTANCES_ON_DEMAND_LINUX_URL,
-		INSTANCES_ON_DEMAND_RHEL_URL,
-		INSTANCES_ON_DEMAND_SLES_URL,
-		INSTANCES_ON_DEMAND_WINDOWS_URL,
-		INSTANCES_ON_DEMAND_WINSQL_URL,
-		INSTANCES_ON_DEMAND_WINSQLWEB_URL,
-
-		INSTANCES_OLD_ON_DEMAND_LINUX_URL,
-		INSTANCES_OLD_ON_DEMAND_RHEL_URL,
-		INSTANCES_OLD_ON_DEMAND_SLES_URL,
-		INSTANCES_OLD_ON_DEMAND_WINDOWS_URL,
-		INSTANCES_OLD_ON_DEMAND_WINSQL_URL,
-		INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL
-	]
+	if pricing_type == "ondemand":
+		urls = [
+			INSTANCES_ON_DEMAND_LINUX_URL,
+			INSTANCES_ON_DEMAND_RHEL_URL,
+			INSTANCES_ON_DEMAND_SLES_URL,
+			INSTANCES_ON_DEMAND_WINDOWS_URL,
+			INSTANCES_ON_DEMAND_WINSQL_URL,
+			INSTANCES_ON_DEMAND_WINSQLWEB_URL,
+	
+			INSTANCES_OLD_ON_DEMAND_LINUX_URL,
+			INSTANCES_OLD_ON_DEMAND_RHEL_URL,
+			INSTANCES_OLD_ON_DEMAND_SLES_URL,
+			INSTANCES_OLD_ON_DEMAND_WINDOWS_URL,
+			INSTANCES_OLD_ON_DEMAND_WINSQL_URL,
+			INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL
+		]
+	elif pricing_type == "spot":
+		urls = [ INSTANCES_SPOT_URL ]
+	else:
+		raise ValueError("get_ec2_ondemand_instances_prices: pricing_type argument must be 'ondemand' or 'spot'")
 
 	result_regions = []
 	result = {
@@ -442,9 +448,12 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	}
 
 	for u in urls:
-		os_type = INSTANCES_ONDEMAND_OS_TYPE_BY_URL[u]
-		if get_specific_os_type and os_type != filter_os_type:
-			continue
+		os_type = None
+		if pricing_type == "ondemand":
+			os_type = INSTANCES_ONDEMAND_OS_TYPE_BY_URL[u]			
+			if get_specific_os_type and os_type != filter_os_type:
+				continue
+				
 		data = _load_data(u)
 		if "config" in data and data["config"] and "regions" in data["config"] and data["config"]["regions"]:
 			for r in data["config"]["regions"]:
@@ -463,6 +472,15 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	
 									for price_data in s["valueColumns"]:
 										price = None
+										os_type_report = None
+										
+										if pricing_type == "spot":
+											os_type_report = price_data["name"]
+											if get_specific_os_type and os_type_report != filter_os_type:
+												continue
+										else:
+											os_type_report = os_type
+											
 										try:
 											price = float(price_data["prices"][currency])
 										except ValueError:
@@ -475,7 +493,7 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	
 										instance_types.append({
 											"type" : _type,
-											"os" : os_type,
+											"os" : os_type_report,
 											"price" : price
 										})
 	
@@ -501,7 +519,7 @@ if __name__ == "__main__":
 
 
 	parser = argparse.ArgumentParser(add_help=True, description="Print out the current prices of EC2 instances")
-	parser.add_argument("--type", "-t", help="Show ondemand or reserved instances", choices=["ondemand", "reserved"], required=True)
+	parser.add_argument("--type", "-t", help="Show ondemand, reserved, or spot instances", choices=["ondemand", "reserved", "spot"], required=True)
 	parser.add_argument("--filter-region", "-fr", help="Filter results to a specific region", choices=EC2_REGIONS, default=None)
 	parser.add_argument("--filter-type", "-ft", help="Filter results to a specific instance type", choices=EC2_INSTANCE_TYPES, default=None)
 	parser.add_argument("--filter-os-type", "-fo", help="Filter results to a specific os type", choices=EC2_OS_TYPES, default=None)
@@ -516,8 +534,8 @@ if __name__ == "__main__":
 			print "ERROR: Please install 'prettytable' using pip:    pip install prettytable"
 
 	data = None
-	if args.type == "ondemand":
-		data = get_ec2_ondemand_instances_prices(args.filter_region, args.filter_type, args.filter_os_type)
+	if args.type == "ondemand" or args.type == "spot":
+		data = get_ec2_ondemand_instances_prices(args.filter_region, args.filter_type, args.filter_os_type, args.type)
 	elif args.type == "reserved":
 		data = get_ec2_reserved_instances_prices(args.filter_region, args.filter_type, args.filter_os_type)
 
@@ -526,7 +544,7 @@ if __name__ == "__main__":
 	elif args.format == "table":
 		x = PrettyTable()
 
-		if args.type == "ondemand":
+		if args.type == "ondemand" or args.type == "spot":
 			try:			
 				x.set_field_names(["region", "type", "os", "price"])
 			except AttributeError:
@@ -562,7 +580,7 @@ if __name__ == "__main__":
 
 		print x
 	elif args.format == "csv":
-		if args.type == "ondemand":
+		if args.type == "ondemand" or args.type == "spot":
 			print "region,type,os,price"
 			for r in data["regions"]:
 				region_name = r["region"]
