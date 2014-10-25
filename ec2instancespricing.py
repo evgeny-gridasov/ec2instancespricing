@@ -101,6 +101,7 @@ JSON_NAME_TO_EC2_REGIONS_API = {
 	"us-west-2" : "us-west-2",
 	"eu-ireland" : "eu-west-1",
 	"eu-west-1" : "eu-west-1",
+	"eu-frankfurt" : "eu-central-1",
 	"eu-central-1" : "eu-central-1",
 	"apac-sin" : "ap-southeast-1",
 	"ap-southeast-1" : "ap-southeast-1",
