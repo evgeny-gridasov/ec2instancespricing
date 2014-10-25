@@ -409,7 +409,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 	return result
 
 def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=None, filter_os_type=None, pricing_type="ondemand"):
-	""" Get EC2 on-demand instances prices. Results can be filtered by region """
+	""" Get EC2 on-demand or spot instances prices. Results can be filtered by region """
 
 	get_specific_region = (filter_region is not None)
 	get_specific_instance_type = (filter_instance_type is not None)
