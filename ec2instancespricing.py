@@ -32,6 +32,7 @@ except ImportError:
 
 EC2_REGIONS = [
 	"us-east-1",
+	"us-gov-west-1",
 	"us-west-1",
 	"us-west-2",
 	"eu-west-1",
@@ -59,6 +60,11 @@ EC2_INSTANCE_TYPES = [
 	"c3.2xlarge",
 	"c3.4xlarge",
 	"c3.8xlarge",
+	"c4.large",
+	"c4.xlarge",
+	"c4.2xlarge",
+	"c4.4xlarge",
+	"c4.8xlarge",
 	"c1.medium",
 	"c1.xlarge",
 	"cc1.4xlarge",
@@ -98,6 +104,7 @@ JSON_NAME_TO_EC2_REGIONS_API = {
 	"us-east-1" : "us-east-1",
 	"us-west" : "us-west-1",
 	"us-west-1" : "us-west-1",
+	"us-gov-west-1" : "us-gov-west-1",
 	"us-west-2" : "us-west-2",
 	"eu-ireland" : "eu-west-1",
 	"eu-west-1" : "eu-west-1",
