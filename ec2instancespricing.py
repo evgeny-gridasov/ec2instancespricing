@@ -107,6 +107,7 @@ EC2_OS_TYPES = [
 	"sles",        # api platform name = ""
 	"mswinSQL",    # api platform name = "windows"
 	"mswinSQLWeb", # api platform name = "windows"
+	"mswinSQLEnt", # api platform name = "windows"
 ]
 
 JSON_NAME_TO_EC2_REGIONS_API = {
@@ -143,45 +144,52 @@ INSTANCES_OLD_ON_DEMAND_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/pre
 INSTANCES_OLD_ON_DEMAND_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/mswinSQL-od.min.js"
 INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/mswinSQLWeb-od.min.js"
 
-INSTANCES_RESERVED_LIGHT_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-light.min.js"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-light.min.js"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-ri-light.min.js"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-light.min.js"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-light.min.js"
-INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-light.min.js"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-medium.min.js"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-medium.min.js"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-ri-medium.min.js"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-medium.min.js"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-medium.min.js"
-INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-medium.min.js"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-heavy.min.js"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-heavy.min.js"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-ri-heavy.min.js"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-heavy.min.js"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-heavy.min.js"
-INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-heavy.min.js"
+INSTANCES_RESERVED_LIGHT_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-light.min.js"
+INSTANCES_RESERVED_LIGHT_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-light.min.js"
+INSTANCES_RESERVED_LIGHT_RESERVATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-ri-light.min.js"
+INSTANCES_RESERVED_LIGHT_RESERVATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-light.min.js"
+INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-light.min.js"
+INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-light.min.js"
+INSTANCES_RESERVED_MEDIUM_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-medium.min.js"
+INSTANCES_RESERVED_MEDIUM_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-medium.min.js"
+INSTANCES_RESERVED_MEDIUM_RESERVATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-ri-medium.min.js"
+INSTANCES_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-medium.min.js"
+INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-medium.min.js"
+INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-medium.min.js"
+INSTANCES_RESERVED_HEAVY_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-heavy.min.js"
+INSTANCES_RESERVED_HEAVY_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-heavy.min.js"
+INSTANCES_RESERVED_HEAVY_RESERVATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-ri-heavy.min.js"
+INSTANCES_RESERVED_HEAVY_RESERVATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-ri-heavy.min.js"
+INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-ri-heavy.min.js"
+INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-heavy.min.js"
 INSTANCES_SPOT_URL = "http://spot-price.s3.amazonaws.com/spot.js"
 
-INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_linux.min.js"
-INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_redhatlinux.min.js"
-INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_suselinux.min.js"
-INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_mswin.min.js"
-INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_mswinsqlstd.min.js"
-INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_mswinsqlweb.min.js"
-INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_linux.min.js"
-INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_redhatlinux.min.js"
-INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_suselinux.min.js"
-INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_mswin.min.js"
-INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_mswinsqlstd.min.js"
-INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_mswinsqlweb.min.js"
-INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_linux.min.js"
-INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_redhatlinux.min.js"
-INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_suselinux.min.js"
-INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswin.min.js"
-INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswinsqlstd.min.js"
-INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswinsqlweb.min.js"
+INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_linux.min.js"
+INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_redhatlinux.min.js"
+INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_suselinux.min.js"
+INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_mswin.min.js"
+INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_mswinsqlstd.min.js"
+INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/light_mswinsqlweb.min.js"
+INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_linux.min.js"
+INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_redhatlinux.min.js"
+INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_suselinux.min.js"
+INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_mswin.min.js"
+INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_mswinsqlstd.min.js"
+INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/medium_mswinsqlweb.min.js"
+INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_linux.min.js"
+INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_redhatlinux.min.js"
+INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_suselinux.min.js"
+INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswin.min.js"
+INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswinsqlstd.min.js"
+INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswinsqlweb.min.js"
 
+INSTANCES_RESERVED_V2_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/linux-unix-shared.min.js"
+INSTANCES_RESERVED_V2_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/red-hat-enterprise-linux-shared.min.js"
+INSTANCES_RESERVED_V2_SUSE_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/suse-linux-shared.min.js"
+INSTANCES_RESERVED_V2_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-shared.min.js"
+INSTANCES_RESERVED_V2_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-with-sql-server-standard-shared.min.js"
+INSTANCES_RESERVED_V2_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-with-sql-server-web-shared.min.js"
+INSTANCES_RESERVED_V2_WINSQLENT_URL = "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-with-sql-server-enterprise-shared.min.js"
 
 INSTANCES_ONDEMAND_OS_TYPE_BY_URL = {
 	INSTANCES_ON_DEMAND_LINUX_URL : "linux",
@@ -200,84 +208,92 @@ INSTANCES_ONDEMAND_OS_TYPE_BY_URL = {
 }
 
 INSTANCES_RESERVED_OS_TYPE_BY_URL = {
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_LINUX_URL : "linux",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_RHEL_URL : "rhel",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_SLES_URL : "sles",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL :  "mswin",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQL_URL : "mswinSQL",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL : "mswinSQLWeb",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_LINUX_URL : "linux",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_RHEL_URL : "rhel",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_SLES_URL : "sles",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL :  "mswin",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL : "mswinSQL",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL : "mswinSQLWeb",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_LINUX_URL : "linux",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_RHEL_URL : "rhel",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL : "sles",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL :  "mswin",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL : "mswinSQL",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_LINUX_URL : "linux",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_RHEL_URL : "rhel",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_SLES_URL : "sles",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_WINDOWS_URL :  "mswin",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQL_URL : "mswinSQL",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_LINUX_URL : "linux",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_RHEL_URL : "rhel",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_SLES_URL : "sles",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL :  "mswin",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQL_URL : "mswinSQL",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_LINUX_URL : "linux",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_RHEL_URL : "rhel",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_SLES_URL : "sles",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_WINDOWS_URL :  "mswin",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQL_URL : "mswinSQL",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL : "mswinSQLWeb",
 	
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_LINUX_URL : "linux",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_RHEL_URL : "rhel",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_SLES_URL : "sles",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL :  "mswin",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQL_URL : "mswinSQL",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL : "mswinSQLWeb",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_LINUX_URL : "linux",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_RHEL_URL : "rhel",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_SLES_URL : "sles",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL :  "mswin",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL : "mswinSQL",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL : "mswinSQLWeb",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_LINUX_URL : "linux",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_RHEL_URL : "rhel",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_SLES_URL : "sles",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL :  "mswin",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQL_URL : "mswinSQL",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_LINUX_URL : "linux",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_RHEL_URL : "rhel",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_SLES_URL : "sles",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINDOWS_URL :  "mswin",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQL_URL : "mswinSQL",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_LINUX_URL : "linux",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_RHEL_URL : "rhel",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_SLES_URL : "sles",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL :  "mswin",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQL_URL : "mswinSQL",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_LINUX_URL : "linux",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_RHEL_URL : "rhel",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_SLES_URL : "sles",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINDOWS_URL :  "mswin",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQL_URL : "mswinSQL",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL : "mswinSQLWeb",
+	
+	INSTANCES_RESERVED_V2_LINUX_URL : "linux",
+	INSTANCES_RESERVED_V2_RHEL_URL : "rhel",
+	INSTANCES_RESERVED_V2_SUSE_URL : "suse",
+	INSTANCES_RESERVED_V2_WINDOWS_URL : "mswin",
+	INSTANCES_RESERVED_V2_WINSQL_URL : "mswinSQL",
+	INSTANCES_RESERVED_V2_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_RESERVED_V2_WINSQLENT_URL : "mswinSQLEnt"
 
 }
 
-INSTANCES_RESERVED_UTILIZATION_TYPE_BY_URL = {
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_LINUX_URL : "light",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_RHEL_URL : "light",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_SLES_URL : "light",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL : "light",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQL_URL : "light",
-	INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL : "light",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_LINUX_URL : "medium",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_RHEL_URL : "medium",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_SLES_URL : "medium",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL : "medium",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL : "medium",
-	INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL : "medium",	
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_LINUX_URL : "heavy",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_RHEL_URL : "heavy",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL : "heavy",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL : "heavy",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL : "heavy",
-	INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL : "heavy",
+INSTANCES_RESERVED_RESERVATION_TYPE_BY_URL = {
+	INSTANCES_RESERVED_LIGHT_RESERVATION_LINUX_URL : "light",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_RHEL_URL : "light",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_SLES_URL : "light",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_WINDOWS_URL : "light",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQL_URL : "light",
+	INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL : "light",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_LINUX_URL : "medium",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_RHEL_URL : "medium",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_SLES_URL : "medium",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL : "medium",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQL_URL : "medium",
+	INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL : "medium",	
+	INSTANCES_RESERVED_HEAVY_RESERVATION_LINUX_URL : "heavy",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_RHEL_URL : "heavy",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_SLES_URL : "heavy",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_WINDOWS_URL : "heavy",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQL_URL : "heavy",
+	INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL : "heavy",
 	
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_LINUX_URL : "light",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_RHEL_URL : "light",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_SLES_URL : "light",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL : "light",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQL_URL : "light",
-	INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL : "light",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_LINUX_URL : "medium",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_RHEL_URL : "medium",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_SLES_URL : "medium",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL : "medium",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL : "medium",
-	INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL : "medium",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_LINUX_URL : "heavy",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_RHEL_URL : "heavy",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_SLES_URL : "heavy",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL : "heavy",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQL_URL : "heavy",
-	INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL : "heavy",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_LINUX_URL : "light",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_RHEL_URL : "light",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_SLES_URL : "light",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINDOWS_URL : "light",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQL_URL : "light",
+	INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL : "light",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_LINUX_URL : "medium",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_RHEL_URL : "medium",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_SLES_URL : "medium",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL : "medium",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQL_URL : "medium",
+	INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL : "medium",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_LINUX_URL : "heavy",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_RHEL_URL : "heavy",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_SLES_URL : "heavy",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINDOWS_URL : "heavy",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQL_URL : "heavy",
+	INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL : "heavy",
 	
 }
 
@@ -308,43 +324,51 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 	currency = DEFAULT_CURRENCY
 
 	urls = [
-		INSTANCES_RESERVED_LIGHT_UTILIZATION_LINUX_URL,
-		INSTANCES_RESERVED_LIGHT_UTILIZATION_RHEL_URL,
-		INSTANCES_RESERVED_LIGHT_UTILIZATION_SLES_URL,
-		INSTANCES_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL,
-		INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQL_URL,
-		INSTANCES_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL,
-		INSTANCES_RESERVED_MEDIUM_UTILIZATION_LINUX_URL,
-		INSTANCES_RESERVED_MEDIUM_UTILIZATION_RHEL_URL,
-		INSTANCES_RESERVED_MEDIUM_UTILIZATION_SLES_URL,
-		INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL,
-		INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL,
-		INSTANCES_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL,
-		INSTANCES_RESERVED_HEAVY_UTILIZATION_LINUX_URL,
-		INSTANCES_RESERVED_HEAVY_UTILIZATION_RHEL_URL,
-		INSTANCES_RESERVED_HEAVY_UTILIZATION_SLES_URL,
-		INSTANCES_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL,
-		INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQL_URL,
-		INSTANCES_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL,
+		INSTANCES_RESERVED_LIGHT_RESERVATION_LINUX_URL,
+		INSTANCES_RESERVED_LIGHT_RESERVATION_RHEL_URL,
+		INSTANCES_RESERVED_LIGHT_RESERVATION_SLES_URL,
+		INSTANCES_RESERVED_LIGHT_RESERVATION_WINDOWS_URL,
+		INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQL_URL,
+		INSTANCES_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL,
+		INSTANCES_RESERVED_MEDIUM_RESERVATION_LINUX_URL,
+		INSTANCES_RESERVED_MEDIUM_RESERVATION_RHEL_URL,
+		INSTANCES_RESERVED_MEDIUM_RESERVATION_SLES_URL,
+		INSTANCES_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL,
+		INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQL_URL,
+		INSTANCES_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL,
+		INSTANCES_RESERVED_HEAVY_RESERVATION_LINUX_URL,
+		INSTANCES_RESERVED_HEAVY_RESERVATION_RHEL_URL,
+		INSTANCES_RESERVED_HEAVY_RESERVATION_SLES_URL,
+		INSTANCES_RESERVED_HEAVY_RESERVATION_WINDOWS_URL,
+		INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQL_URL,
+		INSTANCES_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL,
 		
-		INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_LINUX_URL,
-		INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_RHEL_URL,
-		INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_SLES_URL,
-		INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINDOWS_URL,
-		INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQL_URL,
-		INSTANCES_OLD_RESERVED_LIGHT_UTILIZATION_WINSQLWEB_URL,
-		INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_LINUX_URL,
-		INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_RHEL_URL,
-		INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_SLES_URL,
-		INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINDOWS_URL,
-		INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQL_URL,
-		INSTANCES_OLD_RESERVED_MEDIUM_UTILIZATION_WINSQLWEB_URL,
-		INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_LINUX_URL,
-		INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_RHEL_URL,
-		INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_SLES_URL,
-		INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINDOWS_URL,
-		INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQL_URL,
-		INSTANCES_OLD_RESERVED_HEAVY_UTILIZATION_WINSQLWEB_URL,
+		INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_LINUX_URL,
+		INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_RHEL_URL,
+		INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_SLES_URL,
+		INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINDOWS_URL,
+		INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQL_URL,
+		INSTANCES_OLD_RESERVED_LIGHT_RESERVATION_WINSQLWEB_URL,
+		INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_LINUX_URL,
+		INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_RHEL_URL,
+		INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_SLES_URL,
+		INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINDOWS_URL,
+		INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQL_URL,
+		INSTANCES_OLD_RESERVED_MEDIUM_RESERVATION_WINSQLWEB_URL,
+		INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_LINUX_URL,
+		INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_RHEL_URL,
+		INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_SLES_URL,
+		INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINDOWS_URL,
+		INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQL_URL,
+		INSTANCES_OLD_RESERVED_HEAVY_RESERVATION_WINSQLWEB_URL,
+		
+		INSTANCES_RESERVED_V2_LINUX_URL,
+		INSTANCES_RESERVED_V2_RHEL_URL,
+		INSTANCES_RESERVED_V2_SUSE_URL,
+		INSTANCES_RESERVED_V2_WINDOWS_URL,
+		INSTANCES_RESERVED_V2_WINSQL_URL,
+		INSTANCES_RESERVED_V2_WINSQLWEB_URL,
+		INSTANCES_RESERVED_V2_WINSQLENT_URL,
 	]
 
 	result_regions = []
@@ -360,7 +384,9 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 		os_type = INSTANCES_RESERVED_OS_TYPE_BY_URL[u]
 		if get_specific_os_type and os_type != filter_os_type:
 			continue
-		utilization_type = INSTANCES_RESERVED_UTILIZATION_TYPE_BY_URL[u]
+		reservation_type = ""
+		if u in INSTANCES_RESERVED_RESERVATION_TYPE_BY_URL:
+			reservation_type = INSTANCES_RESERVED_RESERVATION_TYPE_BY_URL[u]
 		data = _load_data(u)
 		if "config" in data and data["config"] and "regions" in data["config"] and data["config"]["regions"]:
 			for r in data["config"]["regions"]:
@@ -382,6 +408,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 						
 					if "instanceTypes" in r:
 						for it in r["instanceTypes"]:
+							# old reserved instances
 							if "sizes" in it:
 								for s in it["sizes"]:
 									_type = re.sub("[^a-z0-9.]*", "", s["size"])
@@ -400,13 +427,6 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 									if get_specific_instance_type and _type != filter_instance_type:
 										continue
 	
-									instance_types.append({
-										"type" : _type,
-										"os" : os_type,
-										"utilization" : utilization_type,
-										"prices" : prices
-									})
-	
 									for price_data in s["valueColumns"]:
 										price = None
 										try:
@@ -421,7 +441,41 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 										elif price_data["name"] == "yrTerm3":
 											prices["3year"]["upfront"] = price
 										elif price_data["name"] == "yrTerm3Hourly":
-											prices["3year"]["hourly"] = price			
+											prices["3year"]["hourly"] = price
+									if prices["1year"]["upfront"] != None or prices["1year"]["hourly"] != None or prices["3year"]["upfront"] != None or prices["3year"]["hourly"] != None:
+										instance_types.append({
+											"type" : _type,
+											"os" : os_type,
+											"reservation" : reservation_type,
+											"prices" : prices
+										})
+	
+											
+							# new reserved instances
+							if "type" in it and "terms" in it:
+								_type = it["type"]
+								if get_specific_instance_type and _type != filter_instance_type:
+										continue
+								for term in it["terms"]:
+									for purchaseOpt in term["purchaseOptions"]:
+										upfront = ""
+										hourly = ""
+										prices = {}
+										for price_data in purchaseOpt["valueColumns"]:
+											if price_data["name"] == "upfront":
+												upfront = (price_data["prices"]["USD"]).replace(",", "")
+											if price_data["name"] == "monthlyStar":
+												hourly = float(price_data["prices"]["USD"]) * 12 / 365 / 24 
+										if term["term"] == "yrTerm1":
+											prices["1year"] = {"upfront" :  upfront, "hourly" : hourly}
+										if term["term"] == "yrTerm3":
+											prices["3year"] = {"upfront" :  upfront, "hourly" : hourly}
+										instance_types.append({
+													"type" : _type,
+													"os" : os_type,
+													"reservation" : purchaseOpt["purchaseOption"],
+													"prices" : prices
+												})
 
 	return result
 
@@ -524,6 +578,8 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 
 if __name__ == "__main__":
 	def none_as_string(v):
+		if v == 0:
+			return "0"
 		if not v:
 			return ""
 		else:
@@ -578,9 +634,9 @@ if __name__ == "__main__":
 					x.add_row([region_name, it["type"], it["os"], none_as_string(it["price"])])
 		elif args.type == "reserved":
 			try:
-				x.set_field_names(["region", "type", "os", "utilization", "term", "price", "upfront"])
+				x.set_field_names(["region", "type", "os", "reservation", "term", "price", "upfront"])
 			except AttributeError:
-				x.field_names = ["region", "type", "os", "utilization", "term", "price", "upfront"]
+				x.field_names = ["region", "type", "os", "reservation", "term", "price", "upfront"]
 
 			try:
 				x.aligns[-1] = "l"
@@ -593,7 +649,7 @@ if __name__ == "__main__":
 				region_name = r["region"]
 				for it in r["instanceTypes"]:
 					for term in it["prices"]:
-						x.add_row([region_name, it["type"], it["os"], it["utilization"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"])])
+						x.add_row([region_name, it["type"], it["os"], it["reservation"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"])])
 
 		print x
 	elif args.format == "csv":
@@ -604,9 +660,9 @@ if __name__ == "__main__":
 				for it in r["instanceTypes"]:
 					print "%s,%s,%s,%s" % (region_name, it["type"], it["os"], none_as_string(it["price"]))
 		elif args.type == "reserved":
-			print "region,type,os,utilization,term,price,upfront"
+			print "region,type,os,reservation,term,price,upfront"
 			for r in data["regions"]:
 				region_name = r["region"]
 				for it in r["instanceTypes"]:
 					for term in it["prices"]:
-						print "%s,%s,%s,%s,%s,%s,%s" % (region_name, it["type"], it["os"], it["utilization"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"]))
+						print "%s,%s,%s,%s,%s,%s,%s" % (region_name, it["type"], it["os"], it["reservation"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"]))
