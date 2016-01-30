@@ -2,8 +2,12 @@ ec2instancespricing.py
 ======================
 
 Written by Eran Sandler (@erans)    
+Forked by Evgeny Gridasov (@evgeny-gridasov)
 http://eran.sandler.co.il    
 http://forecastcloudy.net (@forecastcloudy)
+
+This fork is focused on getting up to date prices only for all EC2 instance types.
+All other features like CPUCore/RAM/Storage/etc info is supported in the main repository.
 
 ec2instancespricing.py is a quick & dirty library and a command line interface (CLI)
 to get a list of all Amazon Web Services EC2 instances pricing including On-Demand,
