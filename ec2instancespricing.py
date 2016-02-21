@@ -138,6 +138,7 @@ INSTANCES_ON_DEMAND_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/sles-od.mi
 INSTANCES_ON_DEMAND_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswin-od.min.js"
 INSTANCES_ON_DEMAND_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQL-od.min.js"
 INSTANCES_ON_DEMAND_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-od.min.js"
+INSTANCES_ON_DEMAND_WINSQLENT_URL = "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLEnterprise-od.min.js"
 
 INSTANCES_OLD_ON_DEMAND_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/linux-od.min.js"
 INSTANCES_OLD_ON_DEMAND_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/rhel-od.min.js"
@@ -145,6 +146,7 @@ INSTANCES_OLD_ON_DEMAND_SLES_URL = "http://a0.awsstatic.com/pricing/1/ec2/previo
 INSTANCES_OLD_ON_DEMAND_WINDOWS_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/mswin-od.min.js"
 INSTANCES_OLD_ON_DEMAND_WINSQL_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/mswinSQL-od.min.js"
 INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/mswinSQLWeb-od.min.js"
+INSTANCES_OLD_ON_DEMAND_WINSQLENT_URL = "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/mswinSQLEnterprise-od.min.js"
 
 INSTANCES_RESERVED_LIGHT_RESERVATION_LINUX_URL = "http://a0.awsstatic.com/pricing/1/ec2/linux-ri-light.min.js"
 INSTANCES_RESERVED_LIGHT_RESERVATION_RHEL_URL = "http://a0.awsstatic.com/pricing/1/ec2/rhel-ri-light.min.js"
@@ -200,6 +202,7 @@ INSTANCES_ONDEMAND_OS_TYPE_BY_URL = {
 	INSTANCES_ON_DEMAND_WINDOWS_URL : "mswin",
 	INSTANCES_ON_DEMAND_WINSQL_URL : "mswinSQL",
 	INSTANCES_ON_DEMAND_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_ON_DEMAND_WINSQLENT_URL : "mswinSQLEnt",
 
 	INSTANCES_OLD_ON_DEMAND_LINUX_URL : "linux",
 	INSTANCES_OLD_ON_DEMAND_RHEL_URL : "rhel",
@@ -207,6 +210,7 @@ INSTANCES_ONDEMAND_OS_TYPE_BY_URL = {
 	INSTANCES_OLD_ON_DEMAND_WINDOWS_URL : "mswin",
 	INSTANCES_OLD_ON_DEMAND_WINSQL_URL : "mswinSQL",
 	INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL : "mswinSQLWeb",
+	INSTANCES_OLD_ON_DEMAND_WINSQLENT_URL : "mswinSQLEnt",
 }
 
 INSTANCES_RESERVED_OS_TYPE_BY_URL = {
@@ -498,13 +502,15 @@ def get_ec2_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 			INSTANCES_ON_DEMAND_WINDOWS_URL,
 			INSTANCES_ON_DEMAND_WINSQL_URL,
 			INSTANCES_ON_DEMAND_WINSQLWEB_URL,
+			INSTANCES_ON_DEMAND_WINSQLENT_URL,
 	
 			INSTANCES_OLD_ON_DEMAND_LINUX_URL,
 			INSTANCES_OLD_ON_DEMAND_RHEL_URL,
 			INSTANCES_OLD_ON_DEMAND_SLES_URL,
 			INSTANCES_OLD_ON_DEMAND_WINDOWS_URL,
 			INSTANCES_OLD_ON_DEMAND_WINSQL_URL,
-			INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL
+			INSTANCES_OLD_ON_DEMAND_WINSQLWEB_URL,
+			INSTANCES_OLD_ON_DEMAND_WINSQLENT_URL
 		]
 	elif pricing_type == "spot":
 		urls = [ INSTANCES_SPOT_URL ]
