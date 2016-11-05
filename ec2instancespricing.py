@@ -406,7 +406,6 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 			for r in data["config"]["regions"]:
 				if "region" in r and r["region"]:
 					region_name = JSON_NAME_TO_EC2_REGIONS_API[r["region"]]
-
 					if get_specific_region and filter_region != region_name:
 						continue
 
@@ -480,10 +479,12 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 												upfront = (price_data["prices"]["USD"]).replace(",", "")
 											if price_data["name"] == "monthlyStar":
 												hourly = float(str.replace(price_data["prices"]["USD"],",","")) * 12 / 365 / 24 
-										if term["term"] == "yrTerm1":
+										if term["term"] == "yrTerm1Standard":
 											prices["1year"] = {"upfront" :  upfront, "hourly" : hourly}
-										if term["term"] == "yrTerm3":
+										if term["term"] == "yrTerm3Standard":
 											prices["3year"] = {"upfront" :  upfront, "hourly" : hourly}
+										if term["term"] == "yrTerm3Convertible":
+											prices["c3year"] = {"upfront" :  upfront, "hourly" : hourly}
 										instance_types.append({
 													"type" : _type,
 													"os" : os_type,
