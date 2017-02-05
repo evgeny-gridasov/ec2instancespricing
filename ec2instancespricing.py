@@ -482,7 +482,7 @@ def get_ec2_reserved_instances_prices(filter_region=None, filter_instance_type=N
 											if price_data["name"] == "upfront":
 												upfront = (price_data["prices"]["USD"]).replace(",", "")
 											if price_data["name"] == "monthlyStar":
-												hourly = float(str.replace(price_data["prices"]["USD"],",","")) * 12 / 365 / 24 
+												hourly = round(float(str.replace(price_data["prices"]["USD"],",","")) * 12 / 365 / 24, 4)
 										if term["term"] == "yrTerm1Standard":
 											prices["1year"] = {"upfront" :  upfront, "hourly" : hourly}
 										if term["term"] == "yrTerm3Standard":
