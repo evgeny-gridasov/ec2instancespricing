@@ -94,10 +94,19 @@ EC2_INSTANCE_TYPES = [
         "p2.16xlarge",
 	"g2.2xlarge",
 	"g2.8xlarge",
+	"g3.4xlarge",
+	"g3.8xlarge",
+	"g3.16xlarge",
 	"i2.xlarge",
 	"i2.2xlarge",
 	"i2.4xlarge",
 	"i2.8xlarge",
+	"i3.large",
+	"i3.xlarge",
+	"i3.2xlarge",
+	"i3.4xlarge",
+	"i3.8xlarge",
+	"i3.16xlarge",
 	"r3.large",
 	"r3.xlarge",
 	"r3.2xlarge",
@@ -114,7 +123,9 @@ EC2_INSTANCE_TYPES = [
 	"d2.4xlarge",
 	"d2.8xlarge",
 	"f1.2xlarge",
-	"f1.16xlarge"
+	"f1.16xlarge",
+        "x1.16xlarge",
+        "x1.32xlarge"
 ]
 
 EC2_OS_TYPES = [
